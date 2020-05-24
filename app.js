@@ -37,6 +37,13 @@ const onMovieSelect = async (movie, summaryElement, side) => {
 	});
 
 	const movieStats = {
+		awards: response.data.Awards.split(' ').reduce((total, current) => {
+			if (isNaN(parseInt(current))) {
+				return total;
+			} else {
+				return parseInt(total) + parseInt(current);
+			}
+		}, 0),
 		metascore: parseInt(response.data.Metascore),
 		imdbRating: parseFloat(response.data.imdbRating),
 		imdbVotes: parseInt(response.data.imdbVotes.replace(/,/g, ''))
@@ -59,6 +66,8 @@ const onMovieSelect = async (movie, summaryElement, side) => {
 const movieComparison = () => {
 	const leftMovieStats = document.querySelectorAll('#summary-left .notification');
 	const rightMovieStats = document.querySelectorAll('#summary-right .notification');
+
+	console.log(leftMovie.awards, rightMovie.awards);
 
 	leftMovieStats.forEach((leftStat, index) => {
 		if (leftStat.dataset.value > rightMovieStats[index].dataset.value) {
@@ -94,7 +103,7 @@ const movieTemplate = (movieDetail, movieStats) => {
 				</div>
 			</div>
 		</article>
-		<div class="notification is-primary awards">
+		<div data-value=${movieStats.awards} class="notification is-primary awards">
 			<h1 class="title">${movieDetail.Awards}</h1>
 			<p class="subtitle">Awards</p>
 		</div>

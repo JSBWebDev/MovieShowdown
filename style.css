@@ -10,10 +10,15 @@
 }
 
 /* render movie */
+.media {
+	max-height: 256px;
+	overflow-y: hidden;
+}
+
 .media-left img {
 	height: 250px;
 }
 
 .awards {
-	min-height: 140px;
+	height: 140px;
 }
