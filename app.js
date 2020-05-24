@@ -66,6 +66,11 @@ const movieComparison = () => {
 			leftMovieStats[index].classList.remove('is-warning');
 			rightMovieStats[index].classList.add('is-warning');
 			rightMovieStats[index].classList.remove('is-primary');
+		} else if (leftStat.dataset.value === rightMovieStats[index].dataset.value) {
+			leftMovieStats[index].classList.add('is-primary');
+			leftMovieStats[index].classList.remove('is-warning');
+			rightMovieStats[index].classList.add('is-primary');
+			rightMovieStats[index].classList.remove('is-warning');
 		} else {
 			rightMovieStats[index].classList.add('is-primary');
 			rightMovieStats[index].classList.remove('is-warning');
@@ -89,7 +94,7 @@ const movieTemplate = (movieDetail, movieStats) => {
 				</div>
 			</div>
 		</article>
-		<div class="notification is-primary">
+		<div class="notification is-primary awards">
 			<h1 class="title">${movieDetail.Awards}</h1>
 			<p class="subtitle">Awards</p>
 		</div>

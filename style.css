@@ -13,3 +13,7 @@
 .media-left img {
 	height: 250px;
 }
+
+.awards {
+	min-height: 140px;
+}
