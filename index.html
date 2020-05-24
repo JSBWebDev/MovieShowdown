@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar is-black">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1 class="navbar-item title">Movie Showdown</h1>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <div class="autocomplete"></div>
+                <div class="summary"></div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-half is-offset-one-quarter has-text-centered notification is-primary tutorial">
+                <h1 class="title">Search for Movie</h1>
+                <p class="subtitle">We will tell you which to watch!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="autocomplete.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

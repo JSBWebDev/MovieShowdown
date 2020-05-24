@@ -1,0 +1,15 @@
+/* dropdown options */
+.results img {
+	height: 50px;
+	margin-right: 1em;
+}
+
+.dropdown-item {
+	display: flex;
+	align-items: center;
+}
+
+/* render movie */
+.media-left img {
+	height: 250px;
+}
