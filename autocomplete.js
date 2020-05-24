@@ -12,7 +12,6 @@ const createAutoComplete = ({ root, onOptionSelect }) => {
 	const dropdown = root.querySelector('.dropdown');
 	const resultsWrapper = root.querySelector('.results');
 
-	input.focus();
 	const onInput = async (e) => {
 		const movies = await fetchData(e.target.value);
 		if (!movies.length) {
