@@ -11,7 +11,21 @@ const fetchData = async (searchTerm) => {
 	return response.data.Search;
 };
 
+const autoCompleteConfig = {
+	renderOption(movie) {
+		imgSrc = movie.Poster !== 'N/A' ? movie.Poster : '';
+		return `
+			<img src="${imgSrc}" />
+			${movie.Title} (${movie.Year})
+        `;
+	},
+	inputValue(movie) {
+		return movie.Title;
+	}
+};
+
 createAutoComplete({
+	...autoCompleteConfig,
 	root: document.querySelector('#autocomplete-left'),
 	onOptionSelect(movie) {
 		onMovieSelect(movie, document.querySelector('#summary-left'), 'left');
@@ -19,6 +33,7 @@ createAutoComplete({
 });
 
 createAutoComplete({
+	...autoCompleteConfig,
 	root: document.querySelector('#autocomplete-right'),
 	onOptionSelect(movie) {
 		onMovieSelect(movie, document.querySelector('#summary-right'), 'right');
@@ -51,6 +66,7 @@ const onMovieSelect = async (movie, summaryElement, side) => {
 
 	const summary = summaryElement;
 	summary.innerHTML = movieTemplate(response.data, movieStats);
+	console.log(movieStats);
 
 	if (side === 'left') {
 		leftMovie = movieStats;
@@ -67,15 +83,13 @@ const movieComparison = () => {
 	const leftMovieStats = document.querySelectorAll('#summary-left .notification');
 	const rightMovieStats = document.querySelectorAll('#summary-right .notification');
 
-	console.log(leftMovie.awards, rightMovie.awards);
-
 	leftMovieStats.forEach((leftStat, index) => {
-		if (leftStat.dataset.value > rightMovieStats[index].dataset.value) {
+		if (parseFloat(leftStat.dataset.value) > parseFloat(rightMovieStats[index].dataset.value)) {
 			leftMovieStats[index].classList.add('is-primary');
 			leftMovieStats[index].classList.remove('is-warning');
 			rightMovieStats[index].classList.add('is-warning');
 			rightMovieStats[index].classList.remove('is-primary');
-		} else if (leftStat.dataset.value === rightMovieStats[index].dataset.value) {
+		} else if (parseFloat(leftStat.dataset.value) === parseFloat(rightMovieStats[index].dataset.value)) {
 			leftMovieStats[index].classList.add('is-primary');
 			leftMovieStats[index].classList.remove('is-warning');
 			rightMovieStats[index].classList.add('is-primary');
