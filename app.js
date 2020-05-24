@@ -13,31 +13,28 @@ const fetchData = async (searchTerm) => {
 
 createAutoComplete({
 	root: document.querySelector('#autocomplete-left'),
-	async onOptionSelect(movie) {
-		const response = await axios.get('http://www.omdbapi.com/', {
-			params: {
-				apikey: 'daf5b6e1',
-				i: movie.imdbID
-			}
-		});
-		const summary = document.querySelector('#summary-left');
-		summary.innerHTML = movieTemplate(response.data);
+	onOptionSelect(movie) {
+		onMovieSelect(movie, document.querySelector('#summary-left'));
 	}
 });
 
 createAutoComplete({
 	root: document.querySelector('#autocomplete-right'),
-	async onOptionSelect(movie) {
-		const response = await axios.get('http://www.omdbapi.com/', {
-			params: {
-				apikey: 'daf5b6e1',
-				i: movie.imdbID
-			}
-		});
-		const summary = document.querySelector('#summary-right');
-		summary.innerHTML = movieTemplate(response.data);
+	onOptionSelect(movie) {
+		onMovieSelect(movie, document.querySelector('#summary-right'));
 	}
 });
+
+const onMovieSelect = async (movie, summaryElement) => {
+	const response = await axios.get('http://www.omdbapi.com/', {
+		params: {
+			apikey: 'daf5b6e1',
+			i: movie.imdbID
+		}
+	});
+	const summary = summaryElement;
+	summary.innerHTML = movieTemplate(response.data);
+};
 
 const movieTemplate = (movieDetail) => {
 	return `
@@ -49,7 +46,7 @@ const movieTemplate = (movieDetail) => {
 				<div class="content">
 					<h1 class="title">${movieDetail.Title}</h1>
 					<p class="subtitle">${movieDetail.Year}</p>
-					<p class="subtitle">${movieDetail.Plot}</p>
+					<p class="subtitle plot">${movieDetail.Plot}</p>
 				</div>
 			</div>
 		</article>

@@ -1,6 +1,6 @@
 const createAutoComplete = ({ root, onOptionSelect }) => {
 	root.innerHTML = `
-		<label for="input">Search</label>
+		<label for="input"><b>Search</b></label>
 		<input name="input" class="input" type="text">
         <div class="dropdown">
             <div class="dropdown-menu">
@@ -8,20 +8,24 @@ const createAutoComplete = ({ root, onOptionSelect }) => {
             </div>
 		</div>
     `;
+
 	const input = root.querySelector('input');
 	const dropdown = root.querySelector('.dropdown');
 	const resultsWrapper = root.querySelector('.results');
 
 	const onInput = async (e) => {
 		const movies = await fetchData(e.target.value);
+
 		if (!movies.length) {
 			resultsWrapper.innerHTML = '';
 			dropdown.classList.remove('is-active');
 			return;
 		}
+
 		document.querySelector('.tutorial').classList.add('is-hidden');
 		dropdown.classList.add('is-active');
 		resultsWrapper.innerHTML = '';
+
 		for (let movie of movies) {
 			const imgSrc = movie.Poster !== 'N/A' ? movie.Poster : '';
 			const option = document.createElement('a');
