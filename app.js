@@ -1,8 +1,5 @@
 const fetchData = async (searchTerm) => {
-	const response = await axios.get('http://www.omdbapi.com/', {
-		headers:{
-			'Access-Control-Allow-Origin': '*'
-		},
+	const response = await axios.get('https://www.omdbapi.com/', {
 		params: {
 			apikey: 'daf5b6e1',
 			s: searchTerm
@@ -49,7 +46,7 @@ let leftMovie;
 let rightMovie;
 
 const onMovieSelect = async (movie, summaryElement, side) => {
-	const response = await axios.get('http://www.omdbapi.com/', {
+	const response = await axios.get('https://www.omdbapi.com/', {
 		params: {
 			apikey: 'daf5b6e1',
 			i: movie.imdbID
