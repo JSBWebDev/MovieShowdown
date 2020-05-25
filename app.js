@@ -1,5 +1,8 @@
 const fetchData = async (searchTerm) => {
 	const response = await axios.get('http://www.omdbapi.com/', {
+		headers:{
+			'Access-Control-Allow-Origin': '*'
+		},
 		params: {
 			apikey: 'daf5b6e1',
 			s: searchTerm
